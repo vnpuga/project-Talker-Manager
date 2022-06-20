@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const req1 = require('./middlewares/req1');
 const req2 = require('./middlewares/req2');
 const req3 = require('./middlewares/req3');
+const { checkEmail, checkPassword } = require('./middlewares/validations')
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,7 +21,7 @@ app.get('/talker', req1);
 
 app.get('/talker/:id', req2);
 
-app.post('/login', req3);
+app.post('/login', checkEmail, checkPassword, req3);
 
 app.listen(PORT, () => {
   console.log('Online');
