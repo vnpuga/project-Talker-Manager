@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fsReadFile = require('./helpers/fsReadFile');
-const fsWriteFile = require('./helpers/fsWriteFile');
+// const fsReadFile = require('./helpers/fsReadFile');
+// const fsWriteFile = require('./helpers/fsWriteFile');
 const req1 = require('./middlewares/req1');
 const req2 = require('./middlewares/req2');
 const req3 = require('./middlewares/req3');
+const req5 = require('./middlewares/req5');
 const { checkEmail, checkPassword, checkAuthorization,
   checkName, checkAge, checkTalk, checkTalkWatchedAt,
   checkTalkRate } = require('./middlewares/validations');
@@ -27,18 +28,7 @@ app.get('/talker/:id', req2);
 app.post('/login', checkEmail, checkPassword, req3);
 
 app.post('/talker', checkAuthorization, checkName, checkAge, checkTalk,
-  checkTalkWatchedAt, checkTalkRate, async (req, res) => {
-  try {
-    const { name, age, talk } = req.body;
-    const data = await fsReadFile();
-    const newTalker = { id: data.length + 1, name, age, talk };
-    const allTalker = [...data, newTalker];
-    fsWriteFile(allTalker);
-    return res.status(201).send(newTalker);
-  } catch (error) {
-    return res.status(400).send({ message: error });
-  }
-});
+  checkTalkWatchedAt, checkTalkRate, req5);
 
 app.listen(PORT, () => {
   console.log('Online');
