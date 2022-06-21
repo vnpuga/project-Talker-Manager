@@ -1,7 +1,7 @@
-const { randomUUID } = require('crypto');
+const { randomBytes } = require('crypto');
 
 const req3 = (_req, res) => {
-  const token = randomUUID().split('-').join('').substring(0, 16);
+  const token = randomBytes(8).toString('hex');
   // console.log(token, token.length);
   return res.status(200).send({ token });
 };
