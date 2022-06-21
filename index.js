@@ -8,6 +8,7 @@ const req3 = require('./middlewares/req3');
 const req5 = require('./middlewares/req5');
 const req6 = require('./middlewares/req6');
 const req7 = require('./middlewares/req7');
+const req8 = require('./middlewares/req8');
 const { checkEmail, checkPassword, checkAuthorization,
   checkName, checkAge, checkTalk, checkTalkWatchedAt,
   checkTalkRate } = require('./middlewares/validations');
@@ -24,6 +25,8 @@ app.get('/', (_request, response) => {
 });
 
 app.get('/talker', req1);
+
+app.get('/talker/search', checkAuthorization, req8);
 
 app.get('/talker/:id', req2);
 
