@@ -7,7 +7,7 @@ const req7 = async (req, res) => {
     const data = await fsReadFile();
     const filterNewData = data.filter((talker) => talker.id !== Number(id));
     fsWriteFile(filterNewData);
-    console.log(filterNewData)
+    // console.log(filterNewData);
     return res.status(204).end();
   } catch (error) {
     return res.status(400).send({ message: error });
