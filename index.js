@@ -6,6 +6,8 @@ const req1 = require('./middlewares/req1');
 const req2 = require('./middlewares/req2');
 const req3 = require('./middlewares/req3');
 const req5 = require('./middlewares/req5');
+const req6 = require('./middlewares/req6');
+const req7 = require('./middlewares/req7');
 const { checkEmail, checkPassword, checkAuthorization,
   checkName, checkAge, checkTalk, checkTalkWatchedAt,
   checkTalkRate } = require('./middlewares/validations');
@@ -29,6 +31,11 @@ app.post('/login', checkEmail, checkPassword, req3);
 
 app.post('/talker', checkAuthorization, checkName, checkAge, checkTalk,
   checkTalkWatchedAt, checkTalkRate, req5);
+
+app.put('/talker/:id', checkAuthorization, checkName, checkAge, checkTalk,
+  checkTalkWatchedAt, checkTalkRate, req6);
+
+app.delete('/talker/:id', checkAuthorization, req7);
 
 app.listen(PORT, () => {
   console.log('Online');

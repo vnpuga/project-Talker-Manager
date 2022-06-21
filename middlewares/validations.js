@@ -114,8 +114,8 @@ const checkTalkRate = (req, res, next) => {
   try {
     const { talk: { rate } } = req.body;
     const MIN_LENGTH = 1;
-    const MAX_LENGTH = 6;
-    if (!rate) {
+    const MAX_LENGTH = 5;
+    if ([undefined, null, ''].includes(rate)) {
       return res.status(400).send({ message: 'O campo "rate" é obrigatório' });
     }
     if (rate < MIN_LENGTH || rate > MAX_LENGTH) {
